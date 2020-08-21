@@ -7,13 +7,13 @@ namespace DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class InitialInveonTaskContext : IMigrationMetadata
+    public sealed partial class InitialInveonTask : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialInveonTaskContext));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialInveonTask));
         
         string IMigrationMetadata.Id
         {
-            get { return "202008210536456_InitialInveonTaskContext"; }
+            get { return "202008212103504_InitialInveonTask"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,25 +1,26 @@
-﻿using Entities.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Entities.Concrete
 {
-    public class Product : AuditableEntity<long>
+    public class Product : AuditableEntity<int>
     {
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
 
-        [Required]
+        [MaxLength(100)]
         public string Barcode { get; set; }
 
+        [Required]
         public decimal Price { get; set; }
 
-        public List<string> Images { get; set; }
-        
+        [MaxLength(500)]
         public string Description { get; set; }
-        
+
+        [Required]
         public int Quantity { get; set; }
+
+        public virtual List<Image> Images { get; set; }
     }
 }

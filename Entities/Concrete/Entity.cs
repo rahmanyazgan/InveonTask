@@ -1,4 +1,5 @@
 ﻿using Entities.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entities.Concrete
 {
@@ -8,6 +9,7 @@ namespace Entities.Concrete
 
     public abstract class Entity<T> : BaseEntity, IEntity<T>
     {
+        [Key]
         public virtual T Id { get; set; }
     }
 }

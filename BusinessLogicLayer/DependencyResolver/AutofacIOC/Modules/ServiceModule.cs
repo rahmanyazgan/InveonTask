@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace WebUI.Modules
+namespace BusinessLogicLayer.DependencyResolver.AutofacIOC.Modules
 {
     public class ServiceModule : Autofac.Module
     {

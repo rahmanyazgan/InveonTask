@@ -14,8 +14,10 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         DbSet<Product> Products { get; set; }
         DbSet<SystemUser> SystemUsers { get; set; }
 
-        //DbSet<TEntity> Set<TEntity>() where TEntity : class;
-        //DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
+        DbSet<Image> Images{ get; set; }
+
+        DbSet<TEntity> Set<TEntity>() where TEntity : class;
+        DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
 
         int SaveChanges();
     }
@@ -29,6 +31,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 
         public DbSet<Product> Products { get; set; }
         public DbSet<SystemUser> SystemUsers { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -38,7 +41,8 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 
         public override int SaveChanges()
         {
-            var modifiedEntries = ChangeTracker.Entries().Where(x => x.Entity is IAuditableEntity
+            var modifiedEntries = ChangeTracker.Entries()
+                .Where(x => x.Entity is IAuditableEntity
                     && (x.State == EntityState.Added || 
                     x.State == EntityState.Modified));
 
@@ -48,21 +52,17 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 
                 if (entity != null)
                 {
-                    string identityName = Thread.CurrentPrincipal.Identity.Name;
                     var now = DateTime.Now;
 
                     if (entry.State == EntityState.Added)
                     {
-                        entity.CreatedBy = identityName;
                         entity.CreatedDate = now;
                     }
                     else
                     {
-                        base.Entry(entity).Property(x => x.CreatedBy).IsModified = false;
                         base.Entry(entity).Property(x => x.CreatedDate).IsModified = false;
                     }
 
-                    entity.UpdatedBy = identityName;
                     entity.UpdatedDate = now;
                 }
             }

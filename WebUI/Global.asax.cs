@@ -1,13 +1,8 @@
 using Autofac;
 using Autofac.Integration.Mvc;
-using DataAccess.Concrete;
-using DataAccess.Concrete.EntityFramework.Contexts;
-using DataAccess.Interfaces;
-using System.Data.Entity;
-using System.Reflection;
+using BusinessLogicLayer.DependencyResolver.AutofacIOC.Modules;
 using System.Web.Mvc;
 using System.Web.Routing;
-using WebUI.Modules;
 
 namespace WebUI
 {
@@ -16,7 +11,7 @@ namespace WebUI
         protected void Application_Start()
         {
             #region Autofac Configuration
-            var builder = new Autofac.ContainerBuilder();
+            var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
 

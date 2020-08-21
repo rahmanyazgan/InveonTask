@@ -2,7 +2,7 @@
 
 namespace Entities.Concrete
 {
-    public class SystemUser : AuditableEntity<long>
+    public class SystemUser : AuditableEntity<int>
     {
         [Required]
         [MaxLength(50)]
@@ -17,8 +17,10 @@ namespace Entities.Concrete
         public string Email { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string Password { get; set; }
 
+        [MaxLength(10)]
         public string Phone { get; set; }
 
         public bool IsAdmin { get; set; }

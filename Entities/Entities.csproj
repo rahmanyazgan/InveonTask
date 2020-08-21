@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Concrete\AuditableEntity.cs" />
     <Compile Include="Concrete\Entity.cs" />
+    <Compile Include="Concrete\Image.cs" />
     <Compile Include="Concrete\SystemUser.cs" />
     <Compile Include="Interfaces\IAuditableEntity.cs" />
     <Compile Include="Interfaces\IEntitiy.cs" />

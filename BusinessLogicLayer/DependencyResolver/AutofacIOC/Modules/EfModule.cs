@@ -4,7 +4,7 @@ using DataAccess.Concrete.EntityFramework.Contexts;
 using DataAccess.Interfaces;
 using System.Data.Entity;
 
-namespace WebUI.Modules
+namespace BusinessLogicLayer.DependencyResolver.AutofacIOC.Modules
 {
     public class EfModule : Autofac.Module
     {
