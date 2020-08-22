@@ -1,5 +1,5 @@
 # InveonTask
-Bir e-ticaret sitesindeki ürünlerin yönetimini sağlayan uygulama.
+Bir e-ticaret sitesindeki ürünlerin yönetimini sağlayan uygulama. (yapım aşamasında)
 
 Kullandığım teknolojiler:
 
