@@ -3,6 +3,10 @@
 ###############################################################################
 * text=auto
 
+# Example of a `.gitattributes` file which reclassifies `.rb` files as Java:
+*.js linguist-language=csharp
+*.css linguist-language=csharp
+
 ###############################################################################
 # Set default behavior for command prompt diff.
 #
