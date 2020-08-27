@@ -20,7 +20,5 @@ namespace Entities.Concrete
 
         [Required]
         public int Quantity { get; set; }
-
-        public virtual List<Image> Images { get; set; }
     }
 }

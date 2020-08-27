@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "twitter-bootstrap@4.5.2",
+      "destination": "Content/plugins/bootstrap/",
+      "files": [
+        "js/bootstrap.min.js",
+        "css/bootstrap.min.css"
+      ]
+    },
+
+    {
+      "library": "jquery@3.0.0",
+      "destination": "Content/plugins/jquery",
+      "files": [ "jquery.min.js" ]
+    },
+
+    {
+      "library": "jquery-migrate@3.0.0",
+      "destination": "Content/plugins/jquery-migrate",
+      "files": [ "jquery-migrate.min.js" ]
+    }
+  ]
+  
+}

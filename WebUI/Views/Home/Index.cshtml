@@ -1,8 +1,41 @@
-﻿
+﻿@model List<WebUI.Models.ProductViewModel>
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Ürünler";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<h2>View</h2>
+@(Html.Kendo().Grid<WebUI.Models.ProductViewModel>()
+    .Name("product")
+    .Columns(clm =>
+    {
+        clm.Bound(p => p.Name)
+                .Title("Ürün").Width(100);
 
+        clm.Bound(p => p.Description)
+            .HtmlAttributes(new { @style = "text-align:center;" })
+            .Title("Açıklama").Width(100);
+
+        clm.Bound(p => p.Quantity)
+                .HtmlAttributes(new { @style = "text-align:center;" })
+                .Title("Adet").Width(100);
+
+        clm.Bound(p => p.Price)
+            .HtmlAttributes(new { @style = "text-align:center;" })
+            .Format("{0:c0}")
+            .Title("Fiyat")
+            .Width(120);
+
+        clm.Bound(p => p.CreatedDate)
+            .Format("{0:dd.MM.yyyy HH:mm:ss}")
+            .HtmlAttributes(new { @style = "text-align:center;" })
+            .Title("Tarih").Width(120);
+        })
+
+    .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .ButtonCount(5))
+
+    .BindTo(Model)
+)

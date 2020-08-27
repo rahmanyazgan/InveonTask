@@ -1,5 +1,9 @@
 ﻿using BusinessLogicLayer.Interfaces;
+using Core.Utilities;
+using Entities.Concrete;
+using System.Collections.Generic;
 using System.Web.Mvc;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
@@ -17,7 +21,16 @@ namespace WebUI.Controllers
 
         public ActionResult Index()
         {
-            var products = ProductService.GetProducts();
+            var data = ProductService.GetProducts();
+            var products = new List<ProductViewModel>();
+
+            foreach (var item in data)
+            {
+                var model = new ProductViewModel();
+                SimpleMapper.PropertyMap(item, model);
+                products.Add(model);
+            }
+
             return View(products);
         }
     }
