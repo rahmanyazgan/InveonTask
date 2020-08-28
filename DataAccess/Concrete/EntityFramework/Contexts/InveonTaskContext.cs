@@ -24,7 +24,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 
     public class InveonTaskContext : DbContext, IContext
     {
-        public InveonTaskContext() : base("Name=InveonTaskContext")
+        public InveonTaskContext() : base("Name=DefaultConnection")
         {
             // this.Configuration.LazyLoadingEnabled = false; 
         }
