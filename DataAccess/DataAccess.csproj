@@ -58,18 +58,6 @@
     <Compile Include="Concrete\UnitOfWork.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
-    <Compile Include="Migrations\202008212103504_InitialInveonTask.cs" />
-    <Compile Include="Migrations\202008212103504_InitialInveonTask.designer.cs">
-      <DependentUpon>202008212103504_InitialInveonTask.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202008212107574_UpdateInveonTask.cs" />
-    <Compile Include="Migrations\202008212107574_UpdateInveonTask.designer.cs">
-      <DependentUpon>202008212107574_UpdateInveonTask.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202008212125079_UpdateColumns.cs" />
-    <Compile Include="Migrations\202008212125079_UpdateColumns.designer.cs">
-      <DependentUpon>202008212125079_UpdateColumns.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\ISystemUserRepository.cs" />
@@ -84,17 +72,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202008212103504_InitialInveonTask.resx">
-      <DependentUpon>202008212103504_InitialInveonTask.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008212107574_UpdateInveonTask.resx">
-      <DependentUpon>202008212107574_UpdateInveonTask.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202008212125079_UpdateColumns.resx">
-      <DependentUpon>202008212125079_UpdateColumns.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
