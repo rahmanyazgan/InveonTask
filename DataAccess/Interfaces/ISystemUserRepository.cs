@@ -4,6 +4,6 @@ namespace DataAccess.Interfaces
 {
     public interface ISystemUserRepository : IGenericRepository<SystemUser>
     {
-        SystemUser GetById(long id);
+        SystemUser GetById(int id);
     }
 }

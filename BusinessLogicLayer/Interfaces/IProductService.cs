@@ -5,7 +5,7 @@ namespace BusinessLogicLayer.Interfaces
 {
     public interface IProductService : IEntityService<Product>
     {
-        Product GetById(long Id);
+        Product GetById(int Id);
 
         List<Product> GetProducts();
     }

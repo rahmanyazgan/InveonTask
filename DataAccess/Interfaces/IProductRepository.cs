@@ -6,7 +6,7 @@ namespace DataAccess.Interfaces
 {
     public interface IProductRepository : IGenericRepository<Product>
     {
-        Product GetById(long id);
+        Product GetById(int id);
 
         List<Product> GetAllProducts();
     }

@@ -17,7 +17,7 @@ namespace BusinessLogicLayer.Concrete
             _productRepository = productRepository;
         }
 
-        public Product GetById(long Id)
+        public Product GetById(int Id)
         {
             return _productRepository.GetById(Id);
         }

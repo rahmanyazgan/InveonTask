@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.EntityFramework.Repositories
 
         }
 
-        public SystemUser GetById(long id)
+        public SystemUser GetById(int id)
         {
             return FindBy(x => x.Id == id).FirstOrDefault();
         }

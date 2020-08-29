@@ -7,7 +7,7 @@ using System.Linq;
 namespace BusinessLogicLayer.Concrete
 {
 
-    public abstract class EntityService<T> : IEntityService<T> where T : BaseEntity
+    public class EntityService<T> : IEntityService<T> where T : BaseEntity
     {
         IUnitOfWork _unitOfWork;
         IGenericRepository<T> _repository;

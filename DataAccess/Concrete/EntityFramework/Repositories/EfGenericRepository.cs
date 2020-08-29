@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace DataAccess.Concrete
 {
-    public abstract class EfGenericRepository<T> :
+    public class EfGenericRepository<T> :
         IGenericRepository<T> where T : BaseEntity
     {
         protected DbContext _entities;
@@ -19,6 +19,11 @@ namespace DataAccess.Concrete
             _entities = context;
             _dbset = context.Set<T>();
         }
+
+        //public T Get(params object[] keys)
+        //{
+        //    return _dbset.Find(keys);
+        //}
 
         public virtual T Get(Func<T, bool> predicate = null)
         {

@@ -16,7 +16,7 @@ namespace BusinessLogicLayer.Concrete
             _systemUserRepository = personRepository;
         }
 
-        public SystemUser GetById(long Id)
+        public SystemUser GetById(int Id)
         {
             return _systemUserRepository.GetById(Id);
         }

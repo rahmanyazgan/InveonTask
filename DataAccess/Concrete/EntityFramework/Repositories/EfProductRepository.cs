@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework.Repositories
 
         }
 
-        public Product GetById(long id)
+        public Product GetById(int id)
         {
             return FindBy(p => p.Id == id).FirstOrDefault();
         }
