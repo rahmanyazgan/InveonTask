@@ -10,4 +10,4 @@ Veritabanının oluşturulması:
 
 Kullandığım teknolojiler:
 
-.NET MVC 5, MS SQL, Entity Framework (Code-First), Design Patterns(Repository, Unit of Work Pattern), Autofac(DI, IOC), Kendo UI
+.NET MVC 5, MS SQL, Entity Framework (Code-First), Design Patterns(Repository, Unit of Work), Autofac(DI, IOC), Kendo UI
