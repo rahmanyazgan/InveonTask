@@ -1,6 +1,8 @@
 using Autofac;
 using Autofac.Integration.Mvc;
 using BusinessLogicLayer.DependencyResolver.AutofacIOC.Modules;
+using System.Globalization;
+using System.Threading;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -24,8 +26,17 @@ namespace WebUI
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             #endregion
 
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+            ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+        }
+
+        protected void Application_BeginRequest()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("tr-TR");
         }
     }
 }

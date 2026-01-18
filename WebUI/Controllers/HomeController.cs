@@ -31,6 +31,8 @@ namespace WebUI.Controllers
                 products.Add(model);
             }
 
+            ViewBag.Title = "Test";
+
             return View(products);
         }
     }

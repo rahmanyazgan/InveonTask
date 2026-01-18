@@ -1,8 +1,253 @@
-﻿
+﻿@model List<WebUI.Models.ProductViewModel>
+
 @{
     ViewBag.Title = "Ürün Yönetimi";
     Layout = "~/Areas/Admin/Views/Shared/Layout.cshtml";
 }
 
-<h2>Ürün Yönetimi</h2>
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">
+            <i class="fas fa-boxes"></i> Ürün Yönetimi
+        </h1>
+        @Html.ActionLink("Yeni Ürün Ekle", "Create", null, new { @class = "btn btn-primary btn-sm" })
+    </div>
 
+    <!-- Alert Messages -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> @TempData["ErrorMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <!-- Main Card -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Ürün Listesi</h6>
+        </div>
+
+        <div class="card-body">
+            @if (Model != null && Model.Any())
+            {
+                <!-- Product Statistics -->
+                <div class="row mb-3">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Toplam Ürün
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            @Model.Where(p => !p.IsDeleted).Count()
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Toplam Stok
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            @Model.Where(p => !p.IsDeleted).Sum(p => p.Quantity)
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-warehouse fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                            Ortalama Fiyat
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            @Model.Where(p => !p.IsDeleted).Average(p => p.Price).ToString("C0")
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            Düşük Stok
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            @Model.Where(p => !p.IsDeleted && p.Quantity < 10).Count()
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Table -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th><i class="fas fa-hashtag"></i> ID</th>
+                                <th><i class="fas fa-tag"></i> Ürün Adı</th>
+                                <th><i class="fas fa-barcode"></i> Barkod</th>
+                                <th><i class="fas fa-align-left"></i> Açıklama</th>
+                                <th><i class="fas fa-cubes"></i> Adet</th>
+                                <th><i class="fas fa-money-bill-wave"></i> Fiyat</th>
+                                <th><i class="fas fa-calendar-alt"></i> Tarih</th>
+                                <th><i class="fas fa-cogs"></i> İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Where(p => !p.IsDeleted))
+                            {
+                                <tr>
+                                    <td><span class="badge badge-secondary">#@item.Id</span></td>
+                                    <td>
+                                        <strong>@item.Name</strong>
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.Barcode))
+                                        {
+                                            <code>@item.Barcode</code>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.Description))
+                                        {
+                                            if (item.Description.Length > 50)
+                                            {
+                                                <span data-toggle="tooltip" data-placement="top" title="@item.Description">
+                                                    @(item.Description.Substring(0, 47) + "...")
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                @item.Description
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        @if (item.Quantity < 10)
+                                        {
+                                            <span class="badge badge-warning">@item.Quantity</span>
+                                        }
+                                        else if (item.Quantity < 50)
+                                        {
+                                            <span class="badge badge-info">@item.Quantity</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-success">@item.Quantity</span>
+                                        }
+                                    </td>
+                                    <td class="text-right">
+                                        <strong class="text-success">@item.Price.ToString("C")</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <small class="text-muted">
+                                            @(item.CreatedDate?.ToString("dd.MM.yyyy") ?? "-")
+                                            <br>
+                                            @(item.CreatedDate?.ToString("HH:mm") ?? "")
+                                        </small>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="İşlemler">
+                                            <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-warning btn-sm fas fa-edit" title="Düzenle" data-toggle="tooltip">Düzenle</a>
+
+
+                                            <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-sm fas fa-edit" title="Düzenle" data-toggle="tooltip">Sil</a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <div class="mb-3">
+                        <i class="fas fa-box-open fa-5x text-gray-300"></i>
+                    </div>
+                    <h4 class="text-gray-600">Henüz ürün bulunmamaktadır</h4>
+                    <p class="text-gray-500 mb-4">
+                        İlk ürününüzü eklemek için aşağıdaki butona tıklayın.
+                    </p>
+                    @Html.ActionLink("İlk Ürünü Ekle", "Create", null, new { @class = "btn btn-primary" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Initialize tooltips
+        $('[data-toggle="tooltip"]').tooltip();
+        
+        // Initialize DataTable (if you have DataTables plugin)
+        $('#dataTable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Turkish.json"
+            },
+            "pageLength": 25,
+            "order": [[ 0, "desc" ]]
+        });
+    });
+</script>
+    
